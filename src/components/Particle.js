@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Particles from "react-tsparticles";
 
 function Particle() {
+  const particlesInit = useCallback(async (engine) => {
+    // No need to load anything, react-tsparticles already has features included
+  }, []);
+
   return (
     <Particles
       id="tsparticles"
-      params={{
+      init={particlesInit}
+      options={{
         particles: {
           number: {
             value: 160,
             density: {
               enable: true,
-              value_area: 1500,
+              area: 1500,
             },
-          },
-          line_linked: {
-            enable: false,
-            opacity: 0.03,
           },
           move: {
             direction: "right",
@@ -26,27 +27,32 @@ function Particle() {
             value: 1,
           },
           opacity: {
+            value: 0.5,
             anim: {
               enable: true,
               speed: 1,
               opacity_min: 0.05,
+              sync: false,
             },
+          },
+          links: {
+            enable: false,
           },
         },
         interactivity: {
           events: {
-            onclick: {
+            onClick: {
               enable: true,
               mode: "push",
             },
           },
           modes: {
             push: {
-              particles_nb: 1,
+              quantity: 1,
             },
           },
         },
-        retina_detect: true,
+        detectRetina: true,
       }}
     />
   );
